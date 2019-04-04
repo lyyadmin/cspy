@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        table{
+            width: 98%;
+            margin: 10px auto;
+        }
+        td{
+            background: #FFFFFF;
+            padding: 5px;
+        }
+        .title td{
+            background: #FF5412;
+            color: #FFFFFF;
+            padding: 5px;
+        }
+        .save_box{
+            float: right;
+            margin-right: 1%;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+{% if count > 0 %}
+    <div class="save_box"><a href='savedatas?type=excel'>导出Excel文件</a>&nbsp;<a href='savedatas?type=csv'>导出csv文件</a></div>
+{% else %}
+
+{% endif %}
+<table align="center" style="background: #368BFF" cellspacing="2" cellpadding="2">
+    <tr class="title">
+        <td>序号</td><td>期号</td><td>红球1</td><td>红球2</td><td>红球3</td><td>红球4</td><td>红球5</td><td>红球6</td><td>蓝球</td><td>奖池奖金(元)</td>
+        <td>一等奖注数</td><td>一等奖奖金(元)</td><td>二等奖注数</td><td>二等奖奖金(元)</td><td>总投注额(元)</td><td>开奖日期</td>
+    </tr>
+    {% for cs in data %}
+    <tr>
+        <td>{{ cs.id }}</td>
+        <td>第{{ cs.issue}}期</td>
+        <td style="color: #ff0000;">{{ cs.redone}}</td>
+        <td style="color: #ff0000;">{{ cs.redtwo}}</td>
+        <td style="color: #ff0000;">{{ cs.redthree}}</td>
+        <td style="color: #ff0000;">{{ cs.redfour}}</td>
+        <td style="color: #ff0000;">{{ cs.redfive}}</td>
+        <td style="color: #ff0000;">{{ cs.redsex}}</td>
+        <td style="color: #0000ff;">{{ cs.blueone}}</td>
+        <td>{{ cs.progressive_prize}}</td>
+        <td>{{ cs.first_prize_num}}</td>
+        <td>{{ cs.first_prize}}</td>
+        <td>{{ cs.second_prize_num}}</td>
+        <td>{{ cs.second_prize}}</td>
+        <td>{{ cs.sum_num}}</td>
+        <td>{{ cs.open_prize_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

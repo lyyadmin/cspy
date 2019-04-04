@@ -1,0 +1,8 @@
+#datachart{
+    width: 800px;
+    height: 550px;
+    /*background: #ff8844;*/
+    border: dashed 1px #ff8844;
+    margin: 0px auto;
+}
+.title_bar{ height: 45px;width: 100%;background: #4488ff;color: #FFFFFF;text-align: center;line-height: 45px;font-size: 18px;}

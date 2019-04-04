@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据分析</title>
+    <link rel="stylesheet" href="static/css/index.css" >
+    <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .index_search_box{
+            width: 50%;
+            height: 35px;
+            border: solid 1px #368BFF;
+            margin: 10px 25%;
+        }
+        #querytext{
+            width: 40%;
+            height: 31px;
+            border: solid 1px #FFFFFF;
+            outline: solid 1px #FFFFFF;
+            margin-top: 1px;
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: center;
+        }
+        .input_box{
+            width: 78%;
+        }
+        .index_search_btn{
+            width:22%;
+            height: 35px;
+            background: #368BFF;
+            color: #FFFFFF;
+            margin-left: 78%;
+            margin-top: -35px;
+            font-size: 14px;
+            line-height: 35px;
+            text-align: center;
+            border: solid 1px #368BFF;
+            display: inherit;
+        }
+        .index_search_btn:hover{
+            background: #32A8FF;
+            cursor: default;
+        }
+        #query_resault{
+            width: 100%;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .from_to{
+            width: 54px;
+            height: 25px;
+            margin: 0px auto;
+            text-align: center;
+            border: solid 0px #FFFFFF;
+            outline: solid 0px #FFFFFF;
+            background: #FFFFFF;
+            font-size: 14px;
+            color: #333333;
+        }
+        .cj_btn{
+            width:50px;
+            height: 27px;
+            background: #368BFF;
+            color: #FFFFFF;
+            font-size: 14px;
+            line-height: 27px;
+            text-align: center;
+            border: solid 1px #368BFF;
+        }
+        .cj_btn:hover{
+            background: #32A8FF;
+            cursor: default;
+        }
+        .caiji_box{
+            position: relative;
+            height: 27px;
+            float: right;
+            margin-top: -30px;
+            margin-right: 10px;
+            display:inline;
+            /*display:none;*/
+            border: solid 1px #368BFF;
+        }
+        .chart_box{
+            position: relative;
+            margin-top: 10px;
+            margin-left: 10px;
+            /*background: #368BFF;*/
+            padding: 5px;
+            text-align: left;
+            border-radius: 5px;
+        }
+        .page_box{
+            width: 98%;
+            /*border: dashed 1px #FF5412;*/
+            margin: 0px auto;
+        }
+        .page_box ul li{
+            display: inherit;
+            float: left;
+            padding: 4px;
+            margin-right: 8px;
+            cursor: default;
+            border:solid 1px #5e5e5e;
+        }
+    </style>
+    <script type="text/javascript">
+        function initload() {
+            loadPage(0,'index');
+        }
+        function loadPage(page,operation) {
+            var content = document.getElementById("query_resault");
+            content.innerHTML = "数据加载中...";
+            var path = "getdatas?page="+page+"&operation="+operation;
+            $.ajax({
+                async:true,
+                url : path,
+                success	:	function(data){
+                    content.innerHTML = data;
+                }
+            });
+        }
+        function query_data() {
+            var key = $("#querytext").val();
+            var content = document.getElementById("query_resault");
+            content.innerHTML = "数据加载中...";
+            var path = "getdatas?qihao="+key;
+            $.ajax({
+                async:true,
+                url : path,
+                success	:	function(data){
+                    content.innerHTML = data;
+                }
+            });
+        }
+        function get_data() {
+            var start = $("#start").val();
+            var end = $("#end").val();
+            var content = document.getElementById("query_resault");
+            content.innerHTML = "数据采集中...";
+            var path = "collectdatas?start="+start+"&end="+end;
+//            window.location = path;
+            $.ajax({
+                async:true,
+                url : path,
+                success	:	function(data){
+                    content.innerHTML = data;//"数据采集完成！";
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="initload()">
+    <div class="title_bar"><marquee>欢迎光临</marquee></div>
+    <div class="chart_box">
+        <a href="history" target="_blank">图表显示</a>&nbsp;
+        <a href="history?type=pie3d&select=all" target="_blank">双色球概率图</a>&nbsp;
+        <a href="history?type=pie3d&select=red" target="_blank">红球概率图</a>&nbsp;
+        <a href="history?type=pie3d&select=blue" target="_blank">蓝球概率图</a>
+    </div>
+    <div class="caiji_box">
+        <input id="start" class="from_to" type="text" value="17113"/>到<input id="end" class="from_to" type="text" value="17210"/>期
+        <input class="cj_btn" type="button" onclick="get_data()" value="采集" />
+    </div>
+    <div style="width: 100%;height: auto;text-align: center">
+        <div class="index_search_box">
+            <div class="input_box">
+                第<input id="querytext" type="text" value="03000-17210" placeholder="17095" />期
+            </div>
+            <div class="index_search_btn" onclick="query_data()">查询</div>
+        </div>
+        <div id="query_resault">未加载数据！</div>
+        <div class="page_box">
+            <ul>
+                <li onclick="loadPage(0,'index')">首&nbsp;页</li>
+                <li onclick="loadPage(0,'pre')">上一页</li>
+                <li onclick="loadPage(0,'next')">下一页</li>
+                <li onclick="loadPage(0,'end')">尾&nbsp;页</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

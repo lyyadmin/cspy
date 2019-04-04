@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双色球</title>
+    <link rel="stylesheet" href="static/css/style.css" >
+    <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="static/js/chart-1.0.1.js"></script>
+    <style type="text/css">
+        #datachart{
+            position: relative;
+            width: 100%;
+            height: 600px;
+            /*background: #ff8844;*/
+            border: dashed 1px #ff8844;
+            margin: 0px auto;
+            text-align: center;
+            border-radius: 5px;
+            line-height: 100px;
+            color: #FF5412;
+        }
+    </style>
+    <script type="text/javascript">
+        function getChartdata(){
+            var start = 17079;
+            var end = 17108;
+            var hh = document.getElementById("#datachart");
+            var path = "cache";
+            path = path+'?start='+start+'&end='+end;
+            $.ajax({
+                async:true,
+                url : path,
+                success	:	function(data){
+//                    hh.innerHTML = data;
+                    if(data==null || data.length<=0){
+                        hh.innerHTML = "没有找到你想要的数据！";
+                    }else{
+                        setData(data);
+                    }
+                }
+            });
+        }
+        function setData(json_str) {
+            var dom = document.getElementById("datachart");
+            var chart = $_$.init(dom);
+            chart.setJsonArray(json_str,"{{ type }}","{{ select }}");
+        }
+        function loaded() {
+            getChartdata();
+        }
+    </script>
+</head>
+<body onload="loaded()">
+<div class="title_bar">{{ title }}</div>
+<div id="datachart"><h1>没有找到你想要的数据！</h1></div>
+</body>
+</html>
