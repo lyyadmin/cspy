@@ -1,9 +1,13 @@
-# cspy
-用python的django框架搭建的彩票双色球系统
-功能：1.彩票数据爬去。
-	  2.数据界面展示。
-工具：Pycharm,mysql数据库
-数据结构：
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 100311
+ Source Host           : localhost:3306
+ Source Schema         : lottery
+
+ Target Server Type    : MySQL
  Target Server Version : 100311
  File Encoding         : 65001
 
@@ -39,17 +43,3 @@ CREATE TABLE `cs_chromosphere`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2397 CHARACTER SET = armscii8 COLLATE = armscii8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-数据库机构：./cs_chromosphere.sql
-数据连接：
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'lottery',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
-}
